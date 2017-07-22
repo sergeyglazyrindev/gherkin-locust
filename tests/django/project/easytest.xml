@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frameworks>
+  <framework type="drf">
+    <resources>
+      <resource id="current_user">
+        <rest url="/api/core/users/" method="list" />
+        <rest url="/api/core/users/{id}/" method="get" />
+        <rest url="/api/core/users/" method="post" />
+        <rest url="/api/core/users/{id}/" method="put" />
+        <rest url="/api/core/users/{id}/" method="delete" />
+      </resource>
+    </resources>
+    <rest url="/api/cached/build/" method="list" />
+  </framework>
+</frameworks>

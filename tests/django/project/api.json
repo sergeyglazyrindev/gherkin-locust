@@ -1,0 +1,340 @@
+{
+    "host": "testserver",
+    "info": {
+        "title": "API Schema",
+        "version": ""
+    },
+    "paths": {
+        "/api/cached/build/": {
+            "get": {
+                "operationId": "build_list",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "cached"
+                ]
+            }
+        },
+        "/api/core/users/": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "[model:django.auth_user]",
+                "operationId": "users_list",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "properties": {
+                                "email": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "first_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "description": "",
+                                    "type": "integer"
+                                },
+                                "last_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "username": {
+                                    "description": "",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "username"
+                            ],
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "summary": "[model:django.auth_user]",
+                "tags": [
+                    "core"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "[model:django.auth_user]",
+                "operationId": "users_create",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "properties": {
+                                "email": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "first_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "last_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "username": {
+                                    "description": "",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "username"
+                            ],
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "summary": "[model:django.auth_user]",
+                "tags": [
+                    "core"
+                ]
+            }
+        },
+        "/api/core/users/{id}/": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "[model:django.auth_user]",
+                "operationId": "users_delete",
+                "parameters": [
+                    {
+                        "description": "",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "properties": {
+                                "email": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "first_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "last_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "username": {
+                                    "description": "",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "username"
+                            ],
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "summary": "[model:django.auth_user]",
+                "tags": [
+                    "core"
+                ]
+            },
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "[model:django.auth_user]",
+                "operationId": "users_read",
+                "parameters": [
+                    {
+                        "description": "",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "properties": {
+                                "email": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "first_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "description": "",
+                                    "type": "integer"
+                                },
+                                "last_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "username": {
+                                    "description": "",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "username"
+                            ],
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "summary": "[model:django.auth_user]",
+                "tags": [
+                    "core"
+                ]
+            },
+            "patch": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "[model:django.auth_user]",
+                "operationId": "users_partial_update",
+                "parameters": [
+                    {
+                        "description": "",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "properties": {
+                                "email": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "first_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "last_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "username": {
+                                    "description": "",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "summary": "[model:django.auth_user]",
+                "tags": [
+                    "core"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "[model:django.auth_user]",
+                "operationId": "users_update",
+                "parameters": [
+                    {
+                        "description": "",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "properties": {
+                                "email": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "first_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "last_name": {
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "username": {
+                                    "description": "",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "username"
+                            ],
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "summary": "[model:django.auth_user]",
+                "tags": [
+                    "core"
+                ]
+            }
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0"
+}
