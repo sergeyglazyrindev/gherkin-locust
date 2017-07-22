@@ -64,8 +64,12 @@ config = OpenApiConfig(os.path.join(
 ))
 
 
-def on_registered_user(user):
-    print('AAAAAAAAAA111')
+def on_registered_user(request_handler, user):
+    fixture = {'password': '123456', 'email': 'example@example.com'}
+    resp = request_handler.client.post('/api/core/login/', fixture)
+    if resp.status_code > 0 and resp.status_code != 200:
+        sys.exit(1)
+    return resp
 
 
 class UserBehavior(LocustMixin, TaskSet):
@@ -133,15 +137,10 @@ class UserBehavior(LocustMixin, TaskSet):
         resp = self.client.post('/api/core/users/', fixture)
         if resp.status_code > 0 and resp.status_code != 201:
             sys.exit(1)
-        self.login(fixture)
         return resp
 
     def login(self, fixture):
-        fixture['password'] = '123456'
-        resp = self.client.post('/api/core/login/', fixture)
-        if resp.status_code > 0 and resp.status_code != 200:
-            sys.exit(1)
-        return resp
+        pass
 
 
 class WebsiteUser(HttpLocust):

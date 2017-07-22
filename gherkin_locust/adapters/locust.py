@@ -46,7 +46,7 @@ class LocustScenarioConcreteImplementation(GherkinScenarioI):
     def start(self, locust):
         if not self.is_user_already_registered():
             user = locust.register()
-            self.on_register(user)
+            self.on_register(locust, user)
         else:
             user = locust.login()
         for scenario in self.scenario_suite:

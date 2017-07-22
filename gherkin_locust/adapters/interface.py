@@ -72,15 +72,17 @@ class GherkinScenarioI:
 
         self.callbacks[event_name] = executable
 
-    def on_register(self, user):
+    def on_register(self, request_handler, user):
         """Calls callback in case of user registration
 
+        :param request_handler: Request to be prepared
+        :type request_handler: :class:`gherkin_locust.interface.RequestI`
         :param user: Users data returned by server
         :returns: self
         :rtype: self
 
         """
-        self.callbacks['on_register'](user)
+        self.callbacks['on_register'](request_handler, user)
 
     def is_to_be_skipped_step(self, step):
         """Checks if the step should be skipped according the status of user, etc

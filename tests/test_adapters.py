@@ -14,11 +14,8 @@ class LocustTestCase(TestCase):
         )
         subprocess.call(['cp', os.devnull, path])
         subprocess.Popen(
-            ['python tests/django/project/manage.py migrate'],
-            shell=True
-        )
-        subprocess.Popen(
-            ['python tests/django/project/manage.py runserver'],
+            ['python tests/django/project/manage.py migrate && '
+             'python tests/django/project/manage.py runserver'],
             shell=True
         )
         popen = subprocess.Popen([
@@ -28,7 +25,7 @@ class LocustTestCase(TestCase):
         pid = popen.pid
         subprocess.call([
             '''
-            sleep 10 && kill {pid}
+            sleep 20 && kill {pid}
             '''.format(
                 pid=pid
             )
