@@ -8,3 +8,4 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String)
     string_id = Column(String)
+    password = Column(String)

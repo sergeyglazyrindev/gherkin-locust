@@ -5,6 +5,9 @@ from .interface import (
     ResponseI
 )
 
+from easytest.exceptions import StopProcessingEndpointException
+import warnings
+
 
 class LocustRequest(RequestI):
 
@@ -14,25 +17,31 @@ class LocustRequest(RequestI):
 
     def execute_wrapper(self):
         def wrapper(locust_request, locust):
-            if locust_request.endpoint.is_able_to_prepare_request():
-                locust_request.endpoint.prepare_request(locust)
-            else:
-                locust_request.locust_request_handler.prepare_request(
-                    locust_request, locust
-                )
-            if locust_request.endpoint.is_executable():
-                resp = locust_request.endpoint.execute(locust)
-            else:
-                resp = locust_request.locust_request_handler.execute_request(
-                    locust_request, locust
-                )
-                # resp = self.execute_request(request_handler)
-            if locust_request.endpoint.is_able_to_analyze_response():
-                locust_request.endpoint.analyze_response(locust, resp)
-            else:
-                locust_request.locust_request_handler.analyze_response(
-                    locust_request, locust, resp
-                )
+            try:
+                if locust_request.endpoint.is_able_to_prepare_request():
+                    locust_request.endpoint.prepare_request(locust_request, locust)
+                else:
+                    locust_request.locust_request_handler.prepare_request(
+                        locust_request, locust
+                    )
+                if locust_request.endpoint.is_executable():
+                    resp = locust_request.endpoint.execute(locust)
+                else:
+                    resp = locust_request.locust_request_handler.execute_request(
+                        locust_request, locust
+                    )
+                    # resp = self.execute_request(request_handler)
+                if locust_request.endpoint.is_able_to_analyze_response():
+                    locust_request.endpoint.analyze_response(locust_request, locust, resp)
+                else:
+                    locust_request.locust_request_handler.analyze_response(
+                        locust_request, locust, resp
+                    )
+            except StopProcessingEndpointException:
+                warnings.warn('The endpoint {} skipped. Params of endpoint are : {}'.format(
+                    locust_request.endpoint.__class__.__name__,
+                    locust_request.endpoint.__dict__
+                ))
 
         return partial(wrapper, self)
 
@@ -56,6 +65,8 @@ class LocustScenarioConcreteImplementation(GherkinScenarioI):
                 endpoint = self.matcher.get_endpoint_for_scenario(
                     step
                 )
+                if not endpoint:
+                    continue
                 request_handler = LocustRequest(self, endpoint)
                 locust.add_task(
                     request_handler.execute_wrapper(), endpoint.priority
@@ -96,7 +107,9 @@ class LocustScenarioConcreteImplementation(GherkinScenarioI):
         :rtype: :class:`requests.Response`
 
         """
-        pass
+        return getattr(locust.client, locust_request.endpoint.method.lower())(
+            locust_request.endpoint.url
+        )
 
 
 class LocustMixin:

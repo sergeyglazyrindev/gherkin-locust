@@ -2,7 +2,7 @@ from json import JSONEncoder
 import json
 from gherkin.parser import Parser
 from gherkin.token_scanner import TokenScanner
-from .exceptions import EndpointNotFoundForScenario
+import warnings
 
 
 class ScenarioJsonEncoder(JSONEncoder):
@@ -190,4 +190,4 @@ class ScenarioEndpointMatcher:
         for endpoint, match_attrs in self.endpoint_per_scenario_attrs:
             if scenario == match_attrs:
                 return endpoint
-        raise EndpointNotFoundForScenario
+        warnings.warn('ENDPOINT NOT FOUND FOR ' + repr(scenario.__dict__))
