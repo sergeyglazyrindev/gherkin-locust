@@ -12,3 +12,4 @@ __pycache__
 .#*
 todo.org
 *.sqlite3
+.eggs

@@ -2,7 +2,8 @@ from rest_framework import routers
 from .project.api import BuildViewSet
 from .users.api import (
     UserViewSet,
-    LoginViewSet
+    LoginViewSet,
+    RegisterViewSet
 )
 
 # Routers provide an easy way
@@ -19,6 +20,11 @@ core_endpoints = (
         'login',
         LoginViewSet,
         'login'
+    ),
+    (
+        'register',
+        RegisterViewSet,
+        'register'
     ),
 )
 

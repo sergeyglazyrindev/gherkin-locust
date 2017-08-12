@@ -131,7 +131,4 @@ class ScenarioEndpointMatcherTestCase(TestCase):
             self.endpoint,
             {'dsdasds': 1}
         )
-        with self.assertRaises(
-                EndpointNotFoundForScenario
-        ):
-            self.matcher.get_endpoint_for_scenario(self.scenario_step)
+        self.matcher.get_endpoint_for_scenario(self.scenario_step)

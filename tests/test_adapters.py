@@ -9,7 +9,7 @@ class LocustTestCase(TestCase):
         path = os.path.abspath(
             os.path.join(
                 os.path.dirname(__file__),
-                'tests/django/project/db.sqlite3'
+                'django/project/db.sqlite3'
             )
         )
         subprocess.call(['cp', os.devnull, path])

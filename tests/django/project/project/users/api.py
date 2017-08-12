@@ -31,3 +31,21 @@ class LoginViewSet(viewsets.ViewSet):
         return Response({
             'id': u.id
         })
+
+
+class RegisterViewSet(viewsets.ViewSet):
+
+    permission_classes = (AllowAny, )
+
+    def create(self, request):
+        email = request.data['email']
+        password = request.data['password']
+        u = get_user_model().objects.create(
+            email=email,
+            username=email
+        )
+        u.set_password(password)
+        u.save()
+        return Response({
+            'id': u.id
+        })

@@ -107,6 +107,9 @@ class LocustScenarioConcreteImplementation(GherkinScenarioI):
         :rtype: :class:`requests.Response`
 
         """
+        if not locust_request.endpoint.method:
+            warnings.warn('Method is None for endpoint: {}'.format(locust_request.endpoint.__dict__))
+            return
         return getattr(locust.client, locust_request.endpoint.method.lower())(
             locust_request.endpoint.url
         )
